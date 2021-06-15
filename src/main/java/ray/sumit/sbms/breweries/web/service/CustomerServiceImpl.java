@@ -1,10 +1,12 @@
 package ray.sumit.sbms.breweries.web.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ray.sumit.sbms.breweries.web.model.CustomerDto;
 
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Override
@@ -26,5 +28,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void saveExistingCustomer(UUID customerId, CustomerDto customer) {
         //TODO: Implement this method
+    }
+
+    @Override
+    public void deleteByCustomerId(UUID customerId) {
+        log.info("Deleting the Customer with beerId: " + customerId);
     }
 }

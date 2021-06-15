@@ -10,4 +10,6 @@ public interface CustomerService {
     CustomerDto saveNewCustomer(CustomerDto customer);
 
     void saveExistingCustomer(UUID customerId, CustomerDto customer);
+
+    void deleteByCustomerId(UUID customerId);
 }

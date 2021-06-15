@@ -41,4 +41,10 @@ public class CustomerrController {
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+    @DeleteMapping({"/{customerId}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteByBeerId(@PathVariable("customerId") UUID customerId) {
+        customerService.deleteByCustomerId(customerId);
+    }
 }
