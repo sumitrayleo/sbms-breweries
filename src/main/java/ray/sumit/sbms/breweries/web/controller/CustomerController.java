@@ -12,11 +12,11 @@ import java.util.UUID;
 
 @RequestMapping("/api/v1/customer")
 @RestController
-public class CustomerrController {
+public class CustomerController {
     private final CustomerService customerService;
 
     @Autowired
-    public CustomerrController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
