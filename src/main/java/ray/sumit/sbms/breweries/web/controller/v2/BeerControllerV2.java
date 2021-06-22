@@ -1,5 +1,8 @@
 package ray.sumit.sbms.breweries.web.controller.v2;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,26 +12,25 @@ import ray.sumit.sbms.breweries.web.service.v2.BeerServiceV2;
 
 import java.util.UUID;
 
+@Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/api/v2/beer")
 @RestController
 public class BeerControllerV2 {
 
     private final BeerServiceV2 beerServiceV2;
 
-    public BeerControllerV2(BeerServiceV2 beerServiceV2) {
-        this.beerServiceV2 = beerServiceV2;
-    }
-
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDtoV2> getBeer(@PathVariable("beerId") UUID beerId) {
+        log.error("Inside get Beer V2 method ...");
         return new ResponseEntity<>(beerServiceV2.getBeerById(beerId), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity handleNewBeer(@RequestBody BeerDtoV2 beer) {
-        BeerDtoV2 savedBeer = beerServiceV2.saveNewBeer(beer);
+        val savedBeer = beerServiceV2.saveNewBeer(beer);
 
-        HttpHeaders headers = new HttpHeaders();
+        var headers = new HttpHeaders();
         headers.add("location", "http://localhost:8080/api/v1/beer/" + savedBeer.getId());
 
         return new ResponseEntity(headers, HttpStatus.CREATED);
